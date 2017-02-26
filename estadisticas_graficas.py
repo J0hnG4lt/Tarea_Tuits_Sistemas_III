@@ -65,34 +65,65 @@ def graficas2(total1, total2, total3, total4):
 	plt.title("Total de Tweets Semanalmente")
 	plt.show()
 
+def barchart_semanal(frecuencias):
+	x = ['Semana 7', 'Semana 6', 'Semana 5', 'Semana 4']
+	y_pos = np.arange(len(x))
+	colors = [ 'g', 'yellow', 'b', 'r']
+
+	plt.barh(y_pos, frecuencias, align='center', color=colors)
+	plt.yticks(y_pos, x)
+	plt.xlabel('Cantidad')
+	plt.title('Cantidad de tweets generado por semana')
+	
+	plt.grid(True)
+	plt.show()
+
+
+
 
 # Procedimientos para los datos de la primera semana
-file1 = open('evaluado_csv_2017_01_22__2017_01_29.csv','rb')
+file1  = open('evaluado_csv_2017_01_22__2017_01_29.csv','rb')
 reader = csv.reader(file1)
+data1  = list(reader)			# Se lista los tweets obtenidos en semana 4.
+cantidadTweet1 = len(data1)     # Se calcula la cantidad de tweets en semana 4.
+print(cantidadTweet1)
 file1_result = calcular_estadisticas(reader)
-graficas_torta(file1_result, ' Primera Semana')
-print file1_result
+#graficas_torta(file1_result, ' Primera Semana')
+#print file1_result
 
 # Procedimientos para los datos de la segunda semana
-file2 = open('evaluado_csv_2017_01_30__2017_02_05.csv','rb')
+file2  = open('evaluado_csv_2017_01_30__2017_02_05.csv','rb')
 reader = csv.reader(file2)
+data2  = list(reader)			# Se lista los tweets obtenidos en semana 5.
+cantidadTweet2 = len(data2)     # Se calcula la cantidad de tweets en semana 5.
+print(cantidadTweet2)
 file2_result = calcular_estadisticas(reader)
 #graficas_torta(file2_result, ' Segunda Semana')
-print file2_result
+#print file2_result
 
 # Procedimientos para los datos de la tercera semana
-file3 = open('evaluado_csv_2017_02_06__2017_02_12.csv','rb')
+file3  = open('evaluado_csv_2017_02_06__2017_02_12.csv','rb')
 reader = csv.reader(file3)
+data3  = list(reader)			# Se lista los tweets obtenidos en semana 6.
+cantidadTweet3 = len(data3)     # Se calcula la cantidad de tweets en semana 6.
+print(cantidadTweet3)
 file3_result = calcular_estadisticas(reader)
 #graficas_torta(file3_result, ' Tercera Semana')
-print file3_result
+#print file3_result
 
 # Procedimientos para los datos de la cuarta semana
 file4 = open('evaluado_csv_2017_02_13__2017_02_19.csv','rb')
 reader = csv.reader(file4)
+data4  = list(reader)			# Se lista los tweets obtenidos en semana 7.
+cantidadTweet4 = len(data4)     # Se calcula la cantidad de tweets en semana 7.
+print(cantidadTweet4)
 file4_result = calcular_estadisticas(reader)
 #graficas_torta(file4_result, ' Tercera Semana')
-print file4_result
+#print file4_result
+
+frecuencias = [cantidadTweet4, cantidadTweet3, cantidadTweet2, cantidadTweet1]
+barchart_semanal(frecuencias)
+
 
 # Calculamos tweets neutrales durante un mes
 #graficas_torta_tipo_tweet(file1_result[0], file2_result[0], file3_result[0], file4_result[0], 'Tweets Neutrales Durante el Mes')
