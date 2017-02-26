@@ -36,8 +36,9 @@ datasets = ["csv_2017_01_22__2017_01_29.csv",
 
 
 for dataset in datasets:
-    
     datos = pandas.read_csv(dataset, usecols=[4])
     datosSinStopWords = datos.applymap(quitarStopWords)
     datosEvaluados = datosSinStopWords.applymap(evaluarTuit)
     datosEvaluados.to_csv("evaluado_"+dataset)
+
+
