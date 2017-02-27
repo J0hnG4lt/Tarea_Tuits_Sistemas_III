@@ -88,10 +88,13 @@ def barchart_semanal(frecuencias):
 def obtenerFechas(csv_file_name):
 	df = pd.read_csv(csv_file_name)      # Open the file.
 	# Get the days.
-	fechas = pd.to_datetime(df['posted_at'].str[0:11]).sort_values(ascending=True)
-	
+	fechas = df['posted_at'].str[0:11]
 	# Get the frecuency for each day.
 	cantidadDias = fechas.value_counts().to_dict()
+	if 'und' in cantidadDias:
+		cantidadDias.pop('und', None)
+	if 'es' in cantidadDias:
+		cantidadDias.pop('es', None)
 	return cantidadDias
 
 # Para dibujar el bar chart de las frecuencias en cada día de la semana.
@@ -100,7 +103,6 @@ def barchart_diario(dias_semana, num_semana):
 	x = ['Domingo', 'Sabado', 'Viernes', 'Jueves', 'Miercoles', 'Martes', 'Lunes']
 	frecuencias = [] # Arreglo de la frecuencia para cada etiqueta de la gráfica.
 	temp_dias_semana = sorted(dias_semana, reverse=True)
-
 	for dia in temp_dias_semana:
 		frecuencias.append(dias_semana[dia])
 
@@ -122,9 +124,12 @@ def barchart_diario(dias_semana, num_semana):
 # Procedimientos para los datos de la primera semana
 file1  = open('evaluado_csv_2017_01_22__2017_01_29.csv','rb')
 reader = csv.reader(file1)
-data1  = list(reader)			   # Se lista los tweets obtenidos en semana 4.
-cantidadTweet1 = len(data1) - 1    # Se calcula la cantidad de tweets en semana 4.
 fechas = obtenerFechas('csv_2017_01_22__2017_01_29.csv')
+# Se calcula la cantidad de tweets en semana 4.
+cantidadTweet1 = 0
+for fecha in fechas:
+	cantidadTweet1 += fechas[fecha]
+print cantidadTweet1
 #barchart_diario(fechas, 4)
 file1_result = calcular_estadisticas(reader)
 
@@ -134,12 +139,13 @@ file1_result = calcular_estadisticas(reader)
 # Procedimientos para los datos de la segunda semana
 file2  = open('evaluado_csv_2017_01_30__2017_02_05.csv','rb')
 reader = csv.reader(file2)
-data2  = list(reader)			   # Se lista los tweets obtenidos en semana 5.
-cantidadTweet2 = len(data2) - 1    # Se calcula la cantidad de tweets en semana 5.
 fechas = obtenerFechas('csv_2017_01_30__2017_02_05.csv')
-print(fechas)
-barchart_diario(fechas, 5)
-
+# Se calcula la cantidad de tweets en semana 5.
+cantidadTweet2 = 0
+for fecha in fechas:
+	cantidadTweet2 += fechas[fecha]
+print cantidadTweet2
+#barchart_diario(fechas, 5)
 file2_result = calcular_estadisticas(reader)
 #graficas_torta(file2_result, ' Segunda Semana')
 #print file2_result
@@ -147,10 +153,14 @@ file2_result = calcular_estadisticas(reader)
 # Procedimientos para los datos de la tercera semana
 file3  = open('evaluado_csv_2017_02_06__2017_02_12.csv','rb')
 reader = csv.reader(file3)
-data3  = list(reader)			   # Se lista los tweets obtenidos en semana 6.
-cantidadTweet3 = len(data3) - 1    # Se calcula la cantidad de tweets en semana 6.
 fechas = obtenerFechas('csv_2017_02_06__2017_02_12.csv')
-barchart_diario(fechas, 6)
+
+# Se calcula la cantidad de tweets en semana 6.
+cantidadTweet3 = 0
+for fecha in fechas:
+	cantidadTweet3 += fechas[fecha]
+print cantidadTweet3
+#barchart_diario(fechas, 6)
 
 file3_result = calcular_estadisticas(reader)
 #graficas_torta(file3_result, ' Tercera Semana')
@@ -159,17 +169,20 @@ file3_result = calcular_estadisticas(reader)
 # Procedimientos para los datos de la cuarta semana
 file4 = open('evaluado_csv_2017_02_13__2017_02_19.csv','rb')
 reader = csv.reader(file4)
-data4  = list(reader)			    # Se lista los tweets obtenidos en semana 7.
-cantidadTweet4 = len(data4) - 1     # Se calcula la cantidad de tweets en semana 7.
 fechas = obtenerFechas('csv_2017_02_13__2017_02_19.csv')
-barchart_diario(fechas, 7)
+# Se calcula la cantidad de tweets en semana 6.
+cantidadTweet4 = 0
+for fecha in fechas:
+	cantidadTweet4 += fechas[fecha]
+print cantidadTweet4
+#barchart_diario(fechas, 7)
 
 file4_result = calcular_estadisticas(reader)
 #graficas_torta(file4_result, ' Tercera Semana')
 #print file4_result
 
 frecuencias = [cantidadTweet4, cantidadTweet3, cantidadTweet2, cantidadTweet1]
-#barchart_semanal(frecuencias)
+barchart_semanal(frecuencias)
 
 
 # Calculamos tweets neutrales durante un mes
