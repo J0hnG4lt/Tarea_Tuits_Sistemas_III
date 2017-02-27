@@ -74,7 +74,7 @@ def barchart_semanal(frecuencias):
 	y_pos = np.arange(len(x))
 
 	# Color para cada barra.
-	colors = [ 'g', 'yellow', 'b', 'r']
+	colors = [ 'g', 'yellow', 'b', 'r', 'purple']
 
 	# Se dibuja la gráfica.
 	plt.barh(y_pos, frecuencias, align='center', color=colors)
@@ -109,7 +109,7 @@ def barchart_diario(dias_semana, num_semana):
 	y_pos = np.arange(len(x))
 
 	# Color para cada barra.
-	colors = [ 'g', 'yellow', 'b', 'r', 'purple']
+	colors = [ 'g', 'yellow', 'b', 'r', 'gray', 'orange', 'brown']
 
 	# Se dibuja la gráfica.
 	plt.barh(y_pos, frecuencias, align='center', color=colors)
@@ -130,7 +130,7 @@ cantidadTweet1 = 0
 for fecha in fechas:
 	cantidadTweet1 += fechas[fecha]
 print cantidadTweet1
-#barchart_diario(fechas, 4)
+barchart_diario(fechas, 4)
 file1_result = calcular_estadisticas(reader)
 
 #graficas_torta(file1_result, ' Primera Semana')
@@ -145,7 +145,7 @@ cantidadTweet2 = 0
 for fecha in fechas:
 	cantidadTweet2 += fechas[fecha]
 print cantidadTweet2
-#barchart_diario(fechas, 5)
+barchart_diario(fechas, 5)
 file2_result = calcular_estadisticas(reader)
 #graficas_torta(file2_result, ' Segunda Semana')
 #print file2_result
@@ -160,8 +160,7 @@ cantidadTweet3 = 0
 for fecha in fechas:
 	cantidadTweet3 += fechas[fecha]
 print cantidadTweet3
-#barchart_diario(fechas, 6)
-
+barchart_diario(fechas, 6)
 file3_result = calcular_estadisticas(reader)
 #graficas_torta(file3_result, ' Tercera Semana')
 #print file3_result
@@ -175,7 +174,7 @@ cantidadTweet4 = 0
 for fecha in fechas:
 	cantidadTweet4 += fechas[fecha]
 print cantidadTweet4
-#barchart_diario(fechas, 7)
+barchart_diario(fechas, 7)
 
 file4_result = calcular_estadisticas(reader)
 #graficas_torta(file4_result, ' Tercera Semana')
